@@ -1,15 +1,20 @@
-version: "3.9"  # optional since v1.27.0
+version: "3"
 services:
-  web:
-    build: .
-    ports:
-      - "5000:5000"
+  dns:
+    hostname: dns
+    container_name: dns
+    image: internetsystemsconsortium/bind9:9.16
     volumes:
-      - .:/code
-      - logvolume01:/var/log
-    links:
-      - redis
-  redis:
-    image: redis
-volumes:
-  logvolume01: {}
+      - .\bind_data\etc\:/etc/bind
+      - .\bind_data\cache\:var/cache/bind
+      - .\bind_data\lib\:/var/lib/bind
+      - .\bind_data\log\:/var/log
+    ports: 
+        - "53:53/udp"
+        - "53:53/tcp"
+        - "127.0.0.1:953:953/tcp"
+  python:
+    build:
+      context: ./python_data/
+      dockerfile: Dockerfile-py
+            
