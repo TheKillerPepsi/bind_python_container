@@ -1,0 +1,19 @@
+;; db.62.168.192
+;; Reverselookupzone für ricardtesto.de
+;;
+$TTL 2D
+@       IN      SOA     dnssrv2.ricardo.de. pschlief.ricardo.de. (
+                        2019070801
+                        8H
+                        2H
+                        4W
+                        3H )
+;name server NS-Records
+                IN      NS      dnssrv2.ricardo.de.
+ 
+ 
+;PTR Records
+13              IN      PTR     dnssrv2.ricardo.de.
+8               IN      PTR     www.ricardo.de.
+ 
+dnssrv2.ricardo.de.     IN      A       192.168.62.13

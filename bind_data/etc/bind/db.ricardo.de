@@ -1,0 +1,19 @@
+;; db.ricardo.de
+;; Forwardlookupzone für ricardooooooooo.de
+;;
+$TTL 2D
+@       IN      SOA     dnssrv2.ricardo.de. pschlief.ricardo.de. (
+                                1
+                                8H
+                                2H
+                                4W
+                                3H )
+ 
+;name servers NS-Record
+                                IN      NS      dnssrv2.ricardo.de.
+ 
+;name servers A-Record
+dnssrv2.ricardo.de.             IN      A       192.168.62.13
+ 
+;hosts A-Records
+www.ricardo.de.                 IN      A       192.168.62.8

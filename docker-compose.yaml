@@ -1,3 +1,4 @@
+#sudo systemctl stop systemd-resolved before running!
 version: "3"
 services:
   dns:
@@ -5,16 +6,28 @@ services:
     container_name: dns
     image: internetsystemsconsortium/bind9:9.16
     volumes:
-      - .\bind_data\etc\:/etc/bind
-      - .\bind_data\cache\:var/cache/bind
-      - .\bind_data\lib\:/var/lib/bind
-      - .\bind_data\log\:/var/log
+      - ./bind_data/etc/:/etc/bind
+      - ./bind_data/cache/:/var/cache/bind
+      - ./bind_data/lib\:/var/lib/bind
+      - ./bind_data/log\:/var/log
     ports: 
         - "53:53/udp"
         - "53:53/tcp"
         - "127.0.0.1:953:953/tcp"
+    networks:
+      dns_net:
+        ipv4_address: 80.80.80.5
   python:
     build:
       context: ./python_data/
       dockerfile: Dockerfile-py
-            
+    networks:
+      dns_net:
+        ipv4_address: 80.80.80.6
+
+networks:
+    dns_net:
+      ipam:
+        driver: default
+        config:
+          - subnet: 80.80.80.0/24

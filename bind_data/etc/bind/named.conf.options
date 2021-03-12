@@ -1,0 +1,22 @@
+acl "goodclients" {
+ 
+        192.168.62.14;
+        192.168.62.108;
+        172.18.4.137;
+        localhost;
+};
+ 
+ 
+ 
+ 
+options {
+        directory "/var/cache/bind";
+ 
+                #allow-query { goodclients; };
+                listen-on { 127.0.0.1; 192.168.62.13; };
+                #allow-recursion { goodclients; };
+                allow-transfer { none; };
+                forwarders {};
+ 
+};
+};
